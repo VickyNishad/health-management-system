@@ -47,19 +47,3 @@ class PatientLandingWeb extends StatelessWidget {
     );
   }
 }
-
-
-
-// FadeOnScroll(child: const HeroSection()),
-//             FadeOnScroll(child: const ServicesBar()),
-//             FadeOnScroll(child: SpecialtiesSection()),
-//             FadeOnScroll(child: FeaturedDoctorsSection()),
-//             FadeOnScroll(child: ServiceTicker()),
-//             FadeOnScroll(child: WhyBookSection()),
-//             FadeOnScroll(child: DarkHeroAndProcessSection()),
-//             FadeOnScroll(child: TestimonialsAndStatsSection()),
-//             FadeOnScroll(child: FAQSection()),
-//             FadeOnScroll(child: AppDownloadBanner()),
-//             FadeOnScroll(child: RecentBlogsSection()),
-//             FadeOnScroll(child: SupportBanner()),
-//             FadeOnScroll(child: FinalFooter()),
