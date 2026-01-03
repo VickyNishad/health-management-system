@@ -9,9 +9,7 @@ import 'package:medicque_app/features/patient/landing/presentation/common/patien
 import 'package:medicque_app/features/patient/search/presentation/common/search_router.dart';
 import 'package:medicque_app/features/patient/slot_managment/presentaion/common/slot_confirmation_router.dart';
 import 'package:medicque_app/features/splash/splash_screen.dart';
-import 'package:medicque_app/landing/landing.dart';
 import 'package:medicque_app/search/bokking/booking_flow_screen.dart';
-import 'package:medicque_app/search/doctor_grid_screen.dart';
 
 import '../features/admin/dashboard/common/a_dashboard_router.dart';
 import '../features/doctor/dashboard/common/d_dashboard_router.dart';

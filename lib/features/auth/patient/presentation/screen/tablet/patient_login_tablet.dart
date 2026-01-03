@@ -95,15 +95,17 @@ class PatientLoginTablet extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.all(20.0.w),
           child: Center(
-            child: Card(
-              elevation: 8,
-              color: Colors.grey[300],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(50.w), // Larger padding for tablet
-                child: _buildForm(context, state),
+            child: SingleChildScrollView(
+              child: Card(
+                elevation: 8,
+                color: Colors.grey[300],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(50.w), // Larger padding for tablet
+                  child: _buildForm(context, state),
+                ),
               ),
             ),
           ),

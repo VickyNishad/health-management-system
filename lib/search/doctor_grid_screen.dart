@@ -92,9 +92,9 @@ class _DoctorGridScreenState extends State<DoctorGridScreen> {
                   hintText: "Search for Doctors, Hospitals, Clinics",
                   border: InputBorder.none,
                   isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  prefixIconConstraints: const BoxConstraints(
+                  contentPadding: EdgeInsets.symmetric(vertical: 14),
+                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  prefixIconConstraints: BoxConstraints(
                     minHeight: 24,
                     minWidth: 48,
                   ),
@@ -119,9 +119,9 @@ class _DoctorGridScreenState extends State<DoctorGridScreen> {
                   hintText: "Location",
                   border: InputBorder.none,
                   isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                  prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
-                  prefixIconConstraints: const BoxConstraints(
+                  contentPadding: EdgeInsets.symmetric(vertical: 14),
+                  prefixIcon: Icon(Icons.location_on, color: Colors.grey),
+                  prefixIconConstraints: BoxConstraints(
                     minHeight: 24,
                     minWidth: 48,
                   ),
@@ -150,12 +150,9 @@ class _DoctorGridScreenState extends State<DoctorGridScreen> {
                   hintText: "Date",
                   border: InputBorder.none,
                   isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                  prefixIcon: const Icon(
-                    Icons.calendar_today,
-                    color: Colors.grey,
-                  ),
-                  prefixIconConstraints: const BoxConstraints(
+                  contentPadding: EdgeInsets.symmetric(vertical: 14),
+                  prefixIcon: Icon(Icons.calendar_today, color: Colors.grey),
+                  prefixIconConstraints: BoxConstraints(
                     minHeight: 24,
                     minWidth: 48,
                   ),

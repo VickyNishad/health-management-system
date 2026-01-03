@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicque_app/core/components/prifile_image.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -124,15 +125,20 @@ class HeroSection extends StatelessWidget {
                   width: 400,
                   height: 400,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade100,
+                    // color: Colors.blue.shade100,
                     shape: BoxShape.circle,
                   ),
+                  child: ProfileImage(
+                    imagePath: 'assets/images/doctor_img.png',
+                    isCircle: true,
+                    size: 400,
+                  ),
                 ),
-                const Icon(
-                  Icons.person,
-                  size: 300,
-                  color: Colors.blue,
-                ), // Replace with Image.network
+                // const Icon(
+                //   Icons.person,
+                //   size: 300,
+                //   color: Colors.blue,
+                // ), // Replace with Image.network
               ],
             ),
           ),

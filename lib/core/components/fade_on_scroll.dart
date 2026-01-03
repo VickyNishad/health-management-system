@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class FadeOnScroll extends StatefulWidget {
   final Widget child;

@@ -94,7 +94,7 @@ class _FilterGroup extends StatefulWidget {
 
 class _FilterGroupState extends State<_FilterGroup> {
   bool _isExpanded = true;
-  Set<String> _selectedOptions = {};
+  final Set<String> _selectedOptions = {};
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class _FilterGroupState extends State<_FilterGroup> {
               },
               contentPadding: const EdgeInsets.all(0),
             );
-          }).toList(),
+          }),
         const Divider(),
       ],
     );

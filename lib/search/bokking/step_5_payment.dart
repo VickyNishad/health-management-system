@@ -119,9 +119,7 @@ class _Step5PaymentState extends State<Step5Payment> {
                   "Payment Info",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                ...fees.entries
-                    .map((e) => _buildFeeRow(e.key, e.value))
-                    .toList(),
+                ...fees.entries.map((e) => _buildFeeRow(e.key, e.value)),
                 const Divider(height: 20),
                 _buildTotalRow(),
                 const SizedBox(height: 20),

@@ -20,7 +20,12 @@ class PatientLandingWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FBFF), // Light blue background
+      backgroundColor: const Color.fromARGB(
+        255,
+        255,
+        255,
+        255,
+      ), // Light blue background
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: Navbar(),

@@ -103,6 +103,7 @@ class ApiService {
   Future<Map<String, dynamic>> put(String endpoint, dynamic data) async {
     try {
       Response response = await _dio.put(endpoint, data: data);
+
       return response.data;
     } catch (e) {
       throw _handleError(e);

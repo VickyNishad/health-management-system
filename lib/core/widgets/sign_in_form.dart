@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_bloc.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_event.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_state.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -24,85 +28,110 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Welcome Back',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Wrap the Text widget in Expanded to prevent overflow
-            Expanded(
-              child: Text(
-                'Not a member?',
-                softWrap: false,
-                overflow: TextOverflow.fade,
+    return BlocListener<SignUpBloc, SignUpState>(
+      listener: (context, state) {
+        if (state.status == FormStatus.valid) {
+          onSignIn();
+        }
+      },
+      child: BlocBuilder<SignUpBloc, SignUpState>(
+        builder: (context, state) {
+          final bloc = context.read<SignUpBloc>();
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Welcome Back',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
-            ),
-            TextButton(
-              onPressed: onSwitchToSignUp,
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(color: Colors.blue),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Wrap the Text widget in Expanded to prevent overflow
+                  Expanded(
+                    child: Text(
+                      'Not a member?',
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: onSwitchToSignUp,
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        SizedBox(height: 24.h),
-        MyTextField(
-          controller: TextEditingController(),
-          hintText: "Email",
-          obscureText: false,
-          prefixIcon: Icon(Icons.email),
-          keyBoardType: TextInputType.numberWithOptions(),
-          errorText: "",
-          onChanged: (value) {},
-        ),
-        SizedBox(height: 16.h),
-        MyTextField(
-          controller: TextEditingController(),
-          hintText: "Password",
-          obscureText: true,
-          prefixIcon: Icon(Icons.lock),
-          keyBoardType: TextInputType.numberWithOptions(),
-          errorText: "",
-          onChanged: (value) {},
-        ),
-        SizedBox(height: 8.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextButton(onPressed: () {}, child: const Text('Forgot Password?')),
-          ],
-        ),
-        SizedBox(height: 8.h),
-        MyButton(buttonTitle: "Sign In", onTap: onSignIn),
-        SizedBox(height: 8.h),
-        MyDevider(),
-        SizedBox(height: 8.h),
-        MyButton(buttonTitle: "Sign In with OTP?", onTap: onSwitchToOtp),
-        SizedBox(height: 8.h),
-        MyDevider(),
+              SizedBox(height: 24.h),
+              MyTextField(
+                controller: TextEditingController(),
+                hintText: "Email",
+                obscureText: false,
+                prefixIcon: Icon(Icons.email),
+                keyBoardType: TextInputType.numberWithOptions(),
+                errorText: state.nameError,
+                onChanged: (value) {
+                  bloc.add(EmailChanged(value));
+                },
+              ),
+              SizedBox(height: 16.h),
+              MyTextField(
+                controller: TextEditingController(),
+                hintText: "Password",
+                obscureText: true,
+                prefixIcon: Icon(Icons.lock),
+                keyBoardType: TextInputType.numberWithOptions(),
+                errorText: state.nameError,
+                onChanged: (value) {
+                  bloc.add(PasswordChanged(value));
+                },
+              ),
+              SizedBox(height: 8.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Forgot Password?'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              MyButton(buttonTitle: "Sign In", onTap: onSignIn),
+              SizedBox(height: 8.h),
+              MyDevider(),
+              SizedBox(height: 8.h),
+              MyButton(buttonTitle: "Sign In with OTP?", onTap: onSwitchToOtp),
+              SizedBox(height: 8.h),
+              MyDevider(),
 
-        SizedBox(height: 16.h),
+              SizedBox(height: 16.h),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SquireTile(imagePath: '/images/google.png', onTap: onGoogleAuth),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SquireTile(
+                    imagePath: '/images/google.png',
+                    onTap: onGoogleAuth,
+                  ),
 
-            SizedBox(width: 10.w),
+                  SizedBox(width: 10.w),
 
-            SquireTile(imagePath: '/images/apple.png', onTap: onGoogleAuth),
-          ],
-        ),
-      ],
+                  SquireTile(
+                    imagePath: '/images/apple.png',
+                    onTap: onGoogleAuth,
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

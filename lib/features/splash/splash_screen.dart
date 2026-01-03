@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicque_app/core/constants/image_path/image_path.dart';
 import '../../core/services/auth_service.dart';
 import '../../router/portal_detector.dart';
 
@@ -66,16 +67,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FlutterLogo(size: 100),
-            SizedBox(height: 16),
-            CircularProgressIndicator(),
-          ],
-        ),
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // 🔹 Background Image (full screen)
+          Image.asset(ImagePath.bagroundImagePath, fit: BoxFit.cover),
+
+          // 🔹 Foreground Content (safe from notch/status bar)
+          SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  FlutterLogo(size: 100),
+                  SizedBox(height: 16),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

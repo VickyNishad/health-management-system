@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicque_app/core/constants/image_path/image_path.dart';
 import 'package:medicque_app/core/enums/alert_type.dart';
 import 'package:medicque_app/core/services/top_alert_service.dart';
 import 'package:medicque_app/features/auth/patient/presentation/signup_form_ctrl.dart';
@@ -77,7 +78,15 @@ class PatientLoginWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: _buildWebLayout(context),
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: Image.asset(ImagePath.bagroundImagePath, fit: BoxFit.cover),
+          ),
+          _buildWebLayout(context),
+        ],
+      ),
     );
   }
 
@@ -106,31 +115,34 @@ class PatientLoginWeb extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 400.w),
+                    constraints: BoxConstraints(maxWidth: 300.w),
                     padding: EdgeInsets.all(24.w),
                     child: Placeholder(
-                      fallbackHeight: 400.h,
+                      fallbackHeight: 300.h,
                       color: const Color(0xFFE0E0E0),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 400.w),
-                    child: Stack(
-                      children: [
-                        Card(
-                          elevation: 8,
-                          color: Colors.grey[300],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.r),
+                    constraints: BoxConstraints(maxWidth: 500.w),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 80),
+                      child: Stack(
+                        children: [
+                          Card(
+                            elevation: 8,
+                            color: Colors.grey[300],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(24.w),
+                              child: _buildForm(context, state),
+                            ),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(24.w),
-                            child: _buildForm(context, state),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
