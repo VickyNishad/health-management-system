@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicque_app/features/patient/landing/presentation/widgets/HoverNavItem.dart';
+import 'package:medicque_app/features/patient/landing/presentation/widgets/hover_navItem.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
