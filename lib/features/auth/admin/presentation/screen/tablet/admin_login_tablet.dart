@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicque_app/features/auth/patient/presentation/signin_form_ctrl.dart';
 
 import '../../../../../../core/enums/auth_form_type.dart';
 import '../../../../../../core/widgets/otp_form.dart';
@@ -17,7 +18,7 @@ class _AdminLoginTabletState extends State<AdminLoginTablet> {
   AuthFormType _formType = AuthFormType.signIn;
   bool _isLoading = false;
   final TextEditingController _otpController = TextEditingController();
-
+  final SigninFormCtrl _signinFormCtrl = SigninFormCtrl();
   // --- Placeholder methods for authentication logic ---
   // In a real app, these would call a service or API.
 
@@ -115,6 +116,7 @@ class _AdminLoginTabletState extends State<AdminLoginTablet> {
         );
       case AuthFormType.signIn:
         return SignInForm(
+          signinFormCtrl: _signinFormCtrl,
           onSignIn: _signInWithEmail,
           onGoogleAuth: _signInWithGoogle,
           onSwitchToSignUp: () =>

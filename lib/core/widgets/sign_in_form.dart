@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_bloc.dart';
-import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_event.dart';
-import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_state.dart';
+import 'package:medicque_app/core/enums/form_state.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signin/signin_bloc.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signin/signin_event.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signin/signin_state.dart';
+import 'package:medicque_app/features/auth/patient/presentation/signin_form_ctrl.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -17,6 +19,8 @@ class SignInForm extends StatelessWidget {
   final VoidCallback onGoogleAuth;
   final VoidCallback onSwitchToSignUp;
   final VoidCallback onSwitchToOtp;
+  final SigninFormCtrl signinFormCtrl;
+  final bool isLoading;
 
   const SignInForm({
     super.key,
@@ -24,19 +28,22 @@ class SignInForm extends StatelessWidget {
     required this.onGoogleAuth,
     required this.onSwitchToSignUp,
     required this.onSwitchToOtp,
+    required this.signinFormCtrl,
+    this.isLoading = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignUpBloc, SignUpState>(
+    return BlocListener<SigninBloc, SigninState>(
+      listenWhen: (p, c) => p.formStatus != c.formStatus,
       listener: (context, state) {
-        if (state.status == FormStatus.valid) {
+        if (state.formStatus == FormStatus.valid) {
           onSignIn();
         }
       },
-      child: BlocBuilder<SignUpBloc, SignUpState>(
+      child: BlocBuilder<SigninBloc, SigninState>(
         builder: (context, state) {
-          final bloc = context.read<SignUpBloc>();
+          final bloc = context.read<SigninBloc>();
           return Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,24 +76,24 @@ class SignInForm extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               MyTextField(
-                controller: TextEditingController(),
+                controller: signinFormCtrl.email,
                 hintText: "Email",
                 obscureText: false,
                 prefixIcon: Icon(Icons.email),
                 keyBoardType: TextInputType.numberWithOptions(),
-                errorText: state.nameError,
+                errorText: state.emailError,
                 onChanged: (value) {
                   bloc.add(EmailChanged(value));
                 },
               ),
               SizedBox(height: 16.h),
               MyTextField(
-                controller: TextEditingController(),
+                controller: signinFormCtrl.password,
                 hintText: "Password",
                 obscureText: true,
                 prefixIcon: Icon(Icons.lock),
                 keyBoardType: TextInputType.numberWithOptions(),
-                errorText: state.nameError,
+                errorText: state.passwordError,
                 onChanged: (value) {
                   bloc.add(PasswordChanged(value));
                 },
@@ -102,7 +109,13 @@ class SignInForm extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8.h),
-              MyButton(buttonTitle: "Sign In", onTap: onSignIn),
+              MyButton(
+                buttonTitle: isLoading ? "Signing..." : "Sign In",
+                onTap: () {
+                  bloc.add(ValidateAllFields());
+                },
+                isLoading: isLoading,
+              ),
               SizedBox(height: 8.h),
               MyDevider(),
               SizedBox(height: 8.h),

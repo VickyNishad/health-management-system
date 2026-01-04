@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medicque_app/app.dart';
 import 'package:medicque_app/core/provider/app_providers.dart';
 import 'package:medicque_app/core/services/api_service.dart';
+import 'package:medicque_app/features/auth/bloc/form_bloc/signin/signin_bloc.dart';
 import 'package:medicque_app/features/auth/bloc/form_bloc/signup/signup_bloc.dart'
     show SignUpBloc;
 
@@ -29,6 +30,8 @@ void main() async {
           ),
 
           BlocProvider(create: (_) => SignUpBloc()),
+
+          BlocProvider(create: (_) => SigninBloc()),
         ],
         child: const App(),
       ),

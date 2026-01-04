@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignInRequestedEvent event,
     Emitter<AuthState> emit,
   ) async {
+    print('call');
     emit(state.copyWith(isLoading: true, error: null));
 
     await Future.delayed(const Duration(seconds: 2));

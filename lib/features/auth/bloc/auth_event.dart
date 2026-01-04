@@ -5,9 +5,9 @@ import 'package:medicque_app/core/enums/auth_form_type.dart';
 abstract class AuthEvent {}
 
 class AuthSignInRequestedEvent extends AuthEvent {
-  final String email;
-  final String password;
-  AuthSignInRequestedEvent(this.email, this.password);
+  final String? email;
+  final String? password;
+  AuthSignInRequestedEvent({this.email, this.password});
 }
 
 class AuthSignUpRequestedEvent extends AuthEvent {

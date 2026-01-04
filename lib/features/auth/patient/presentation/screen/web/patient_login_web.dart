@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicque_app/core/constants/image_path/image_path.dart';
 import 'package:medicque_app/core/enums/alert_type.dart';
 import 'package:medicque_app/core/services/top_alert_service.dart';
+import 'package:medicque_app/features/auth/patient/presentation/signin_form_ctrl.dart';
 import 'package:medicque_app/features/auth/patient/presentation/signup_form_ctrl.dart';
 import '../../../../../../core/enums/auth_form_type.dart';
 import '../../../../../../core/widgets/otp_form.dart';
@@ -18,6 +19,7 @@ class PatientLoginWeb extends StatelessWidget {
   PatientLoginWeb({super.key});
 
   final SignUpFormController _controller = SignUpFormController();
+  final SigninFormCtrl _signinFormCtrl = SigninFormCtrl();
   final TextEditingController _otpController = TextEditingController();
 
   // Build the form based on BLoC state
@@ -62,7 +64,16 @@ class PatientLoginWeb extends StatelessWidget {
 
       case AuthFormType.signIn:
         return SignInForm(
-          onSignIn: () {},
+          signinFormCtrl: _signinFormCtrl,
+          isLoading: state.isLoading,
+          onSignIn: () {
+            context.read<AuthBloc>().add(
+              AuthSignInRequestedEvent(
+                email: _signinFormCtrl.email.text.trim(),
+                password: _signinFormCtrl.password.text.trim(),
+              ),
+            );
+          },
           onGoogleAuth: () {},
           onSwitchToSignUp: () {
             context.read<AuthBloc>().add(SwitchFormEvent(AuthFormType.signUp));

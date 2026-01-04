@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicque_app/features/auth/patient/presentation/signin_form_ctrl.dart';
 import 'package:medicque_app/features/auth/patient/presentation/signup_form_ctrl.dart';
 import '../../../../../../core/enums/auth_form_type.dart';
 
@@ -17,6 +18,7 @@ class PatientLoginMobile extends StatelessWidget {
   PatientLoginMobile({super.key});
 
   final SignUpFormController _controller = SignUpFormController();
+  final SigninFormCtrl _signinFormCtrl = SigninFormCtrl();
   final TextEditingController _otpController = TextEditingController();
 
   // Build the form based on BLoC state
@@ -57,6 +59,7 @@ class PatientLoginMobile extends StatelessWidget {
 
       case AuthFormType.signIn:
         return SignInForm(
+          signinFormCtrl: _signinFormCtrl,
           onSignIn: () {},
           onGoogleAuth: () {},
           onSwitchToSignUp: () {
